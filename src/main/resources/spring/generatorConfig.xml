@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <classPathEntry location="./libs/mysql/mysql-connector-java/5.1.31/mysql-connector-java-5.1.44.jar"/>
+    <context id="context1">
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://127.0.0.1:3306/spring-skeleton" userId="root" password="password"/>
+        <javaModelGenerator targetPackage="org.skeleton.spring.dto.generated" targetProject="spring/src/main/java"/>
+        <sqlMapGenerator targetPackage="sql.generated" targetProject="spring/src/main/resources"/>
+        <javaClientGenerator targetPackage="org.skeleton.spring.dao.generated" targetProject="spring/src/main/java" type="XMLMAPPER"/>
+
+        <table schema="spring-skeleton" tableName="users"/>
+    </context>
+</generatorConfiguration>
