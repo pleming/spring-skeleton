@@ -1,7 +1,5 @@
 package org.skeleton.spring.controller;
 
-import org.skeleton.spring.code.ResponseCode;
-import org.skeleton.spring.code.ResponseCodeInterface;
 import org.skeleton.spring.dto.generated.Users;
 import org.skeleton.spring.model.ResponseVO;
 import org.skeleton.spring.service.UserService;
@@ -9,7 +7,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 
@@ -39,45 +40,28 @@ public class UserController {
     @RequestMapping(value = "signin", method = RequestMethod.POST)
     @ResponseBody
     public ResponseVO signin(HttpSession httpSession, @RequestBody Users userInfo) {
-        ResponseCodeInterface resData = userService.signinUser(httpSession, userInfo);
-        ResponseVO res = new ResponseVO(resData);
-        return res;
+        return userService.signinUser(httpSession, userInfo) ? new ResponseVO(true, 1, "Sign In Success.") : new ResponseVO(true, 2, "Sign In Failed.");
     }
 
     @RequestMapping(value = "signup", method = RequestMethod.POST)
     @ResponseBody
     public ResponseVO signup(@RequestBody Users userInfo) {
-        ResponseCodeInterface resData = userService.signupUser(userInfo);
-        ResponseVO res = new ResponseVO(resData);
-        return res;
+        return userService.signupUser(userInfo) ? new ResponseVO(true, 1, "Sign Up Success.") : new ResponseVO(true, 2, "Sign Up Failed.");
     }
 
     @RequestMapping(value = "signout", method = RequestMethod.POST)
     @ResponseBody
     public ResponseVO signout(HttpSession httpSession) {
         httpSession.invalidate();
-
-        ResponseVO res = new ResponseVO(ResponseCode.Signout.SIGNOUT_SUCCESS);
-        return res;
+        return new ResponseVO(true, 1, "Sign Out Success.");
     }
 
     @RequestMapping(value = "checkSession", method = RequestMethod.GET)
     @ResponseBody
     public ResponseVO checkSession(HttpSession httpSession) {
-        ResponseCodeInterface resData = null;
-        ResponseVO res = null;
-
-        if (httpSession.getAttribute("userInfo") == null) {
-            resData = ResponseCode.Session.SESSION_INVALID;
-            res = new ResponseVO(resData);
-
-        }
-        else {
-            resData = ResponseCode.Session.SESSION_VALID;
-            res = new ResponseVO(resData);
-            res.setContents(httpSession.getAttribute("userInfo"));
-        }
-
-        return res;
+        if (httpSession.getAttribute("userInfo") == null)
+            return new ResponseVO(true, 1, "Session Not Exists.");
+        else
+            return new ResponseVO(true, 1, "Session Exists.");
     }
 }

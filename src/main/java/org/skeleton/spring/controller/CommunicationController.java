@@ -1,6 +1,5 @@
 package org.skeleton.spring.controller;
 
-import org.skeleton.spring.code.ResponseCode;
 import org.skeleton.spring.model.ResponseVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,22 +14,20 @@ public class CommunicationController {
         return "communication/ajax";
     }
 
+    @RequestMapping(value = "websocket", method = RequestMethod.GET)
+    public String renderWebsocket() {
+        return "communication/websocket";
+    }
+
     @RequestMapping(value = "ajax/get", method = RequestMethod.GET)
     @ResponseBody
     public ResponseVO ajaxGet() {
-        ResponseVO res = new ResponseVO(ResponseCode.Ajax.AJAX_GET);
-        return res;
+        return new ResponseVO(true, 1, "AJAX GET Response.");
     }
 
     @RequestMapping(value = "ajax/post", method = RequestMethod.POST)
     @ResponseBody
     public ResponseVO ajaxPost() {
-        ResponseVO res = new ResponseVO(ResponseCode.Ajax.AJAX_POST);
-        return res;
-    }
-
-    @RequestMapping(value = "websocket", method = RequestMethod.GET)
-    public String renderWebsocket() {
-        return "communication/websocket";
+        return new ResponseVO(true, 1, "AJAX POST Response.");
     }
 }

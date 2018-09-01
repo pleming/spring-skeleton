@@ -28,7 +28,7 @@ public class FileController {
         fileInfo += picture.getOriginalFilename() + "\n";
         fileInfo += String.valueOf(picture.getSize()) + "\n";
 
-        File file = new File(httpSession.getServletContext().getRealPath("/resources/uploads") + "/"+ picture.getOriginalFilename());
+        File file = new File(httpSession.getServletContext().getRealPath("/resources/uploads") + "/" + picture.getOriginalFilename());
 
         try {
             picture.transferTo(file);
@@ -36,7 +36,6 @@ public class FileController {
             e.printStackTrace();
         }
 
-        ResponseVO res = new ResponseVO(true, 1, fileInfo);
-        return res;
+        return new ResponseVO(true, 1, fileInfo);
     }
 }

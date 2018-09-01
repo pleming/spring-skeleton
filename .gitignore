@@ -1,5 +1,6 @@
 *.iml
 src/main/resources/rebel.xml
+src/main/webapp/resources/uploads/
 src/main/webapp/resources/libs/*
 !src/main/webapp/resources/libs/sockjs/
 target
@@ -7,3 +8,5 @@ target
 .classpath
 .project
 .settings/
+src/main/resources/config/db-config.xml
+src/main/resources/config/redis-config.xml

@@ -1,8 +1,5 @@
 package org.skeleton.spring.model;
 
-import org.skeleton.spring.code.ResponseCode;
-import org.skeleton.spring.code.ResponseCodeInterface;
-
 public class ResponseVO {
     private Boolean status;
     private Integer code;
@@ -15,12 +12,6 @@ public class ResponseVO {
         this.status = status;
         this.code = code;
         this.contents = contents;
-    }
-
-    public ResponseVO(ResponseCodeInterface resCode) {
-        this.status = resCode.getStatus();
-        this.code = resCode.getCode();
-        this.contents = resCode.getContents();
     }
 
     public Boolean getStatus() {
